@@ -1,0 +1,30 @@
+
+/* Class = "UILabel"; text = "Hello World 2"; ObjectID = "3KK-MF-o6e"; */
+"3KK-MF-o6e.text" = "Hello World 2";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "3MA-11-tc8"; */
+"3MA-11-tc8.title" = "Home";
+
+/* Class = "UILabel"; text = "Loaded by FirstViewController"; ObjectID = "A5M-7J-77L"; */
+"A5M-7J-77L.text" = "Loaded by FirstViewController";
+
+/* Class = "UILabel"; text = "Home"; ObjectID = "KQZ-1w-vlD"; */
+"KQZ-1w-vlD.text" = "Home";
+
+/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
+"NDk-cv-Gan.text" = "Loaded by SecondViewController";
+
+/* Class = "UILabel"; text = "Hello World"; ObjectID = "Qem-MM-F3c"; */
+"Qem-MM-F3c.text" = "Hello World";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "WnW-wK-gxs"; */
+"WnW-wK-gxs.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Xcf-9a-MuQ"; */
+"Xcf-9a-MuQ.normalTitle" = "Button";
+
+/* Class = "UITabBarItem"; title = "Account"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Account";
+
+/* Class = "UILabel"; text = "Account"; ObjectID = "zEq-FU-wV5"; */
+"zEq-FU-wV5.text" = "Account";

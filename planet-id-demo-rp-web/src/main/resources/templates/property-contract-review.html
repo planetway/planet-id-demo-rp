@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body>
+<main class="body">
+    <header th:replace="~{_fragments :: #header}"></header>
+
+    <p th:utext="#{fudosan.review.reviewinfo}"></p>
+
+    <div class="row mb-4">
+        <div class="col-md-3 data-label text-right" th:text="#{fudosan.name}"></div>
+        <div class="col-md-9"><span th:text="${name}"></span></div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-3 data-label text-right" th:text="#{fudosan.dob}"></div>
+        <div class="col-md-9"><span th:text="${dob}"></span></div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-3 data-label text-right" th:text="#{fudosan.address}"></div>
+        <div class="col-md-9"><span th:text="${address}"></span></div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-3 data-label text-right" th:text="#{fudosan.phonenumber}"></div>
+        <div class="col-md-9"><span th:text="${phone}"></span></div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-3 data-label text-right" th:text="#{fudosan.bankaccount}"></div>
+        <div class="col-md-9"><span th:text="${bank_account}"></span></div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-3 data-label text-right" th:text="#{fudosan.employer}"></div>
+        <div class="col-md-9"><span th:text="${employer}"></span></div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-1 d-flex align-items-center"><a href="#/"><i class="fas fa-long-arrow-left"></i></a></div>
+        <div class="col-md-10"><img th:src="@{'/images/fudosan/contract-'+${#locale.language}+'.png'}"/></div>
+        <div class="col-md-1 d-flex align-items-center"><a href="#/"><i class="fas fa-long-arrow-right"></i></a></div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 data-label text-center">1/23</div>
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 text-center">
+            <form id="sign-planet-id" method="post" action="/redirect-to-pcore">
+                <div style="display: none">
+                    <input name="client_id" type="text" th:value="${authRequest.clientId}">
+                    <input name="state" type="text" th:value="${authRequest.state}">
+                    <input name="nonce" type="text" th:value="${authRequest.nonce}">
+                    <input name="redirect_uri" type="text" th:value="${authRequest.redirectUri}">
+                    <input name="action" type="text" th:value="${authRequest.action}">
+                    <input name="level" type="text" th:value="${authRequest.level}">
+                    <input name="scope" type="text" th:value="${authRequest.scope}">
+                    <input name="response_type" type="text" th:value="${authRequest.responseType}">
+                    <input name="planet_id" type="text" th:value="${authRequest.planetId}">
+                    <input name="payload" type="text" th:value="${authRequest.payload}">
+                </div>
+                <button id="sign_document" class="btn btn-primary"
+                        type="submit"
+                        th:text="#{fudosan.sign}"></button>
+            </form>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+</body>
+</html>

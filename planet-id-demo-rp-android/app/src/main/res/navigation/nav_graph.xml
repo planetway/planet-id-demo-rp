@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.planetway.demo.fudosan.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_apply"
+            app:destination="@id/fragment_apply" />
+        <action
+            android:id="@+id/action_fragment_home_to_accountSettingsFragment"
+            app:destination="@id/accountSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_apply"
+        android:name="com.planetway.demo.fudosan.ui.apply.ApplyFragment"
+        android:label="fragment_apply"
+        tools:layout="@layout/fragment_apply" >
+        <action
+            android:id="@+id/action_fragment_apply_to_fragment_sign"
+            app:destination="@id/fragment_sign" />
+        <argument android:name="personData" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_sign"
+        android:name="com.planetway.demo.fudosan.ui.sign.SignFragment"
+        android:label="fragment_sign"
+        tools:layout="@layout/fragment_sign" >
+        <action
+            android:id="@+id/action_fragment_sign_to_signSuccessFragment"
+            app:popUpTo="@id/fragment_home"
+            app:destination="@id/signSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountSettingsFragment"
+        android:name="com.planetway.demo.fudosan.ui.accountsettings.AccountSettingsFragment"
+        android:label="fragment_account_settings"
+        tools:layout="@layout/fragment_account_settings" >
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_fragment_home"
+            app:destination="@id/fragment_home" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_myAccountFragment"
+            app:destination="@id/myAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.planetway.demo.fudosan.ui.accountsettings.myaccount.MyAccountFragment"
+        android:label="fragment_account_settings_my_account"
+        tools:layout="@layout/fragment_account_settings_my_account" >
+        <action
+            android:id="@+id/action_myAccountFragment_to_linkPlanetIdFragment"
+            app:destination="@id/linkPlanetIdFragment" />
+        <action
+            android:id="@+id/action_myAccountFragment_to_dataFromLraFragment"
+            app:destination="@id/dataFromLraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/linkPlanetIdFragment"
+        android:name="com.planetway.demo.fudosan.ui.accountsettings.myaccount.link.LinkPlanetIdFragment"
+        android:label="LinkPlanetIdFragment" />
+    <fragment
+        android:id="@+id/signSuccessFragment"
+        android:name="com.planetway.demo.fudosan.ui.sign.SignSuccessFragment"
+        android:label="fragment_signature_success"
+        tools:layout="@layout/fragment_signature_success" />
+    <fragment
+        android:id="@+id/dataFromLraFragment"
+        android:name="com.planetway.demo.fudosan.ui.accountsettings.myaccount.datafromlra.DataFromLraFragment"
+        android:label="DataFromLraFragment" >
+        <action
+            android:id="@+id/action_dataFromLraFragment_to_dataFromLraSuccessFragment"
+            app:popUpTo="@id/myAccountFragment"
+            app:destination="@id/dataFromLraSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataFromLraSuccessFragment"
+        android:name="com.planetway.demo.fudosan.ui.accountsettings.myaccount.datafromlra.DataFromLraSuccessFragment"
+        android:label="DataFromLraSuccessFragment" />
+</navigation>

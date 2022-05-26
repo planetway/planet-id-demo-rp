@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+      lang="en" xml:lang="en">
+<head th:fragment="head">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="#{fudosan.index.html.title}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/fudosan-fontawesome.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/fudosan-main.css}"/>
+    <link type="image/png" rel="icon" th:href="@{/images/favicon.png}" />
+</head>
+<body>
+<header class="mb-4" id="header">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-6 my-3">
+                <img class="logo" th:src="@{'/images/fudosan/fudosan-logo-' + ${#locale.language} + '.png'}"/>
+            </div>
+
+            <div class="col-md-6 controls">
+                <ul class="lang list-inline">
+                    <li class="list-inline-item" style="cursor: pointer;" onclick="window.location.replace('?lang=' + 'en')">English</li>
+                    <li class="list-inline-item" style="cursor: pointer;" onclick="window.location.replace('?lang=' + 'ja')">日本語</li>
+                </ul>
+                <ul class="user list-inline" sec:authorize="!isAuthenticated()">
+                    <li class="list-inline-item">
+                        <button class="btn btn-primary full-width"
+                                onclick="window.location.href = '/login'"
+                                th:text="#{fudosan.login}">
+                            <i class="fas fa-long-arrow-right"></i></button>
+                    </li>
+                </ul>
+                <ul class="user list-inline" sec:authorize="isAuthenticated()">
+                    <li class="list-inline-item"><a href="/settings" th:text="${#authentication.getPrincipal().getUsername()}"></a></li>
+                    <li class="list-inline-item"><a href="/logout" th:text="#{fudosan.logout}"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<header class="mb-4" id="header-plain">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-6 my-3">
+                <img class="logo" th:src="@{'/images/fudosan/fudosan-logo-' + ${#locale.language} + '.png'}"/>
+            </div>
+
+            <div class="col-md-6 controls">
+                <ul class="lang list-inline">
+                    <li class="list-inline-item" style="cursor: pointer;" onclick="window.location.replace('?lang=' + 'en')">English</li>
+                    <li class="list-inline-item" style="cursor: pointer;" onclick="window.location.replace('?lang=' + 'ja')">日本語</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<footer class="text-center" th:fragment="footer">
+    <p th:text="#{fudosan.footer}"></p>
+</footer>
+</body>
+</html>

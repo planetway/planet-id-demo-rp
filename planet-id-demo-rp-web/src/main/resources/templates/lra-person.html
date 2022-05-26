@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body th:unless="${authRequest}">
+<main class="body">
+    <header th:replace="~{_fragments :: #header}"></header>
+
+    <div th:if="${error}">
+        <div><span style="color: red" th:text="#{px.error.personal.data}"></span></div>
+    </div>
+
+    <div th:unless="${error}">
+        <h4 th:text="#{fudosan.personal.information}"></h4>
+        <div class="container">
+
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.name.romaji}"></div>
+                <div class="col-md-9"><span th:text="${person.firstNameRomaji} + ' ' + ${person.lastNameRomaji}"></span>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.name.katakana}"></div>
+                <div class="col-md-9"><span
+                        th:text="${person.lastNameKatakana} + ' ' + ${person.firstNameKatakana}"></span></div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.name.kanji}"></div>
+                <div class="col-md-9"><span th:text="${person.lastNameKanji} + ' ' + ${person.firstNameKanji}"></span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.date.of.birth}"></div>
+                <div class="col-md-9"><span th:text="${person.dateOfBirth}"></span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.address.postal.code}"></div>
+                <div class="col-md-9"><span
+                        th:text="${address.postalCode}"></span>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.address.prefecture}"></div>
+                <div class="col-md-9"><span
+                        th:text="${address.prefecture}"></span>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.address.city}"></div>
+                <div class="col-md-9"><span
+                        th:text="${address.city}"></span>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.address.street}"></div>
+                <div class="col-md-9"><span
+                        th:text="${address.street}"></span>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-3 data-label text-right" th:text="#{fudosan.address.building.apartment}"></div>
+                <div class="col-md-9"><span
+                        th:text="${address.buildingApartment}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <button type="button" onclick="window.location.href='/';" class="btn btn-primary"
+            th:text="#{fudosan.back}"></button>
+
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+</body>
+<body th:if="${authRequest}">
+<form id="openid-form" method="post" action="/redirect-to-pcore">
+    <div style="display: none">
+        <input name="client_id" type="text" th:value="${authRequest.clientId}">
+        <input name="state" type="text" th:value="${authRequest.state}">
+        <input name="nonce" type="text" th:value="${authRequest.nonce}">
+        <input name="redirect_uri" type="text" th:value="${authRequest.redirectUri}">
+        <input name="action" type="text" th:value="${authRequest.action}">
+        <input name="level" type="text" th:value="${authRequest.level}">
+        <input name="scope" type="text" th:value="${authRequest.scope}">
+        <input name="response_type" type="text" th:value="${authRequest.responseType}">
+        <input name="planet_id" type="text" th:value="${authRequest.planetId}">
+        <input name="payload" type="text" th:value="${authRequest.payload}">
+    </div>
+</form>
+<script type="text/javascript">
+    document.getElementById('openid-form').submit();
+</script>
+</body>
+</html>

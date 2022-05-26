@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Fudosan Demo RP App</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="invalid_username">Please enter a valid email</string>
+    <string name="invalid_password">Password must be at least 5 characters</string>
+    <string name="passwords_dont_match">Passwords must match</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="email_demo_no_verification">Please note that in the demo app we don\'t use email verification.</string>
+    <string name="password">Password</string>
+    <string name="verify_password">Verify password</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign">Sign</string>
+    <string name="back_to_login">Back to login</string>
+    <string name="login_planetid">Login with Planet Id</string>
+    <string name="login_id_password">Login with ID and password</string>
+    <string name="login_failed">Your username or password is incorrect. Please try again.</string>
+    <string name="login_success">Login successful</string>
+    <string name="success">Success</string>
+    <string name="log_out">Log Out</string>
+    <string name="apply">Apply</string>
+    <string name="next">Next</string>
+    <string name="account_created">Your account has been created!</string>
+    <string name="account_linking">Linking in progress</string>
+    <string name="account_linked">Your account has been linked with PlanetID successfully!</string>
+    <string name="my_account">My Account</string>
+    <string name="create_account">Create new account</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="delete_account_confirmation">Are you sure you want to delete your account? If you delete your account, you will permanently lose all the information related to it.</string>
+    <string name="link_with_planet_id">Link with Planet ID</string>
+    <string name="unlink_with_planet_id">Unlink with Planet ID</string>
+    <string name="unlink_confirmation">Are you sure you want to unlink your Planet ID?</string>
+    <string name="planet_id_not_linked">Your Planet ID is not linked to any account. Please log in with ID and Password and link your Planet ID in your account settings page. If you don\'t have an account, please sign up first.</string>
+    <string name="error">Error</string>
+    <string name="planet_id_app_not_installed">Error! If you don\'t have a Planet ID, then you can visit App Store or Google Play to download it. If you don\'t have an account, please sign up first.</string>
+    <string name="personal_data_from_lra">Personal Data from LRA</string>
+    <string name="personal_data_allow">I hereby allow you to obtain my personal data from LRA.</string>
+    <string name="personal_data_obtained">The obtained data will be following:</string>
+    <string name="label_name_romaji">Name (Romaji):</string>
+    <string name="label_name_katakana">Name (Katakana):</string>
+    <string name="label_name_kanji">Name (Kanji):</string>
+    <string name="label_birth_date">Birth Date:</string>
+    <string name="label_address">Address:</string>
+    <string name="full_name">Full Name</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="address">Address</string>
+    <string name="address_example">1 Marunouchi, Chiyoda-ku, Tokyo</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_number_example">03-5789-4325</string>
+    <string name="bank_account">Bank Account</string>
+    <string name="bank_account_example">324-3874113</string>
+    <string name="employer">Employer</string>
+    <string name="employer_example">Employer Residence Inc.</string>
+    <string name="name">Name</string>
+    <string name="name_example">YUKO SHIMADA</string>
+    <string name="dob">DOB</string>
+    <string name="dob_example">10/01/1972</string>
+    <string name="review_your_info">Please review your current information and sign the contract for your new apartment!</string>
+    <string name="something">1LDK APARTMENT IN AKASAKA, MINATO-KU, TOKYO\n
+Monthly costs: ￥300,000\n
+Maintenance fee: ￥30,000\n
+Security deposit: ￥300,000 yen /　Key money: ￥300,000\n
+Nearest station: Ginza/Akasaka Mitsuke (1 min walk)\n
+Size: 50㎡\n
+Year Built: 2018\n
+Floor: 7F\n
+Direction: Southwest</string>
+    <string name="contract_signed">Your Contract was successfully signed.</string>
+    <string name="contact_you_soon">We will contact you soon about following steps.</string>
+    <string name="select_databank">Select your current databank from the list below. With your consent, we will retrieve all necessary information.</string>
+    <string name="databank_smile">Smile Databanking, Inc</string>
+    <string name="databank_realestate">Real Estate DB, Inc</string>
+    <string name="databank_mori">Mori Databank, Inc</string>
+    <string name="databank_tokyo">Databank Tokyo, Inc</string>
+    <string name="data_to_retrieve">Data to retrieve</string>
+    <string name="retrieve_my_data">Retrieve my data</string>
+    <string name="name_phone_dob">Name\nPhone number\nDOB</string>
+    <string name="address_bank_employer">Address\nBank account\nEmployer</string>
+    <string name="planet_id_activities">Planet ID Activities</string>
+    <string name="personal_data_from_lra_success">Your Personal Data was successfully obtained.</string>
+    <string name="unauthorized">Unauthorized</string>
+    <string name="network_error">Network error</string>
+    <string name="account_deleted">Account deleted successfully</string>
+    <string name="home">Home</string>
+    <string name="account">Account</string>
+</resources>

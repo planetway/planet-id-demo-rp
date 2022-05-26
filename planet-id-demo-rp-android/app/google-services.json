@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "422099970000",
+    "firebase_url": "https://planetway-fudosan.firebaseio.com",
+    "project_id": "planetway-fudosan",
+    "storage_bucket": "planetway-fudosan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422099970000:android:110e3b51639f3fa850fbd5",
+        "android_client_info": {
+          "package_name": "com.planetway.demo.fudosan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422099970000-t32orr8n40pokia82okgor483a9r1i5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA39K30Fh-ClJbr_K9UIAV8lDV4oi3lEf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422099970000-t32orr8n40pokia82okgor483a9r1i5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422099970000:android:b18e0d15057d9e8a50fbd5",
+        "android_client_info": {
+          "package_name": "com.planetway.demo.fudosan.development"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422099970000-t32orr8n40pokia82okgor483a9r1i5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA39K30Fh-ClJbr_K9UIAV8lDV4oi3lEf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422099970000-t32orr8n40pokia82okgor483a9r1i5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422099970000:android:297162aff9dfd6c150fbd5",
+        "android_client_info": {
+          "package_name": "com.planetway.demo.fudosan.test.development"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422099970000-t32orr8n40pokia82okgor483a9r1i5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA39K30Fh-ClJbr_K9UIAV8lDV4oi3lEf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422099970000-t32orr8n40pokia82okgor483a9r1i5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

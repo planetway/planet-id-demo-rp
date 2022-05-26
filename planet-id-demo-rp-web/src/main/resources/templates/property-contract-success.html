@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body>
+<main class="body">
+    <header th:replace="~{_fragments :: #header}"></header>
+
+    <p th:text="#{fudosan.success.text}"></p>
+
+    <p th:text="#{fudosan.success.followingsteps}"></p>
+
+    <button type="submit"
+            onclick="window.location.href='/';"
+            class="btn btn-primary"
+            th:text="#{fudosan.success.restart}"></button>
+
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+</body>
+</html>

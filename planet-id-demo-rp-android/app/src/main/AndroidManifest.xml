@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.planetway.demo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.planetway.planetid.INVOKE_ACTION" />
+
+    <application
+        android:name=".fudosan.DemoRpApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_fudosan_logo_ja"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_fudosan_logo_ja"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".fudosan.ui.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".fudosan.ui.MainActivity" />
+        <activity android:name=".fudosan.ui.AppLinkActivity">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="login-with-planet-id"
+                    android:scheme="fudosandemorp" />
+                <data
+                    android:host="link-planet-id"
+                    android:scheme="fudosandemorp" />
+                <data
+                    android:host="data-bank-consent"
+                    android:scheme="fudosandemorp" />
+                <data
+                    android:host="document-sign"
+                    android:scheme="fudosandemorp" />
+                <data
+                    android:host="lra-consent"
+                    android:scheme="fudosandemorp" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

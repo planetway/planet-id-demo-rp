@@ -1,0 +1,141 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'org.liquibase.gradle' version '2.0.1'
+    id 'com.github.jk1.dependency-license-report' version '1.6'
+    id 'com.gorylenko.gradle-git-properties' version '2.0.0'
+    id 'jacoco'
+    id 'idea'
+}
+
+apply plugin: 'org.liquibase.gradle'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'com.gorylenko.gradle-git-properties'
+
+group = 'com.planetway'
+version = ''
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://artifactory.niis.org/xroad-maven-releases/"
+    }
+}
+
+dependencies {
+    implementation project(":planet-id-rp-sdk")
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations'
+    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '6.4'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    implementation group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.6.3'
+
+    implementation 'com.zaxxer:HikariCP:3.3.1'
+    implementation 'org.liquibase:liquibase-core'
+
+    implementation 'org.niis.xrd4j:common:0.3.0'
+    implementation 'org.niis.xrd4j:client:0.3.0'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.1'
+    implementation 'com.sun.xml.messaging.saaj:saaj-impl:1.3.28'
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'org.bitbucket.b_c:jose4j:0.6.5'
+
+    compileOnly 'org.projectlombok:lombok'
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'com.auth0:java-jwt:3.8.3'
+    testImplementation 'org.assertj:assertj-core:3.11.1'
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += sourceSets.main.output
+            runtimeClasspath += sourceSets.main.output
+        }
+    }
+}
+
+idea {
+    module {
+        testSourceDirs += sourceSets.integrationTest.java.srcDirs
+        testSourceDirs += sourceSets.integrationTest.resources.srcDirs
+        scopes.TEST.plus += [ configurations.integrationTestCompile ]
+    }
+}
+
+configurations {
+    integrationTestRuntimeOnly.extendsFrom runtimeOnly
+    integrationTestImplementation.extendsFrom testImplementation
+    integrationTestAnnotationProcessor.extendsFrom annotationProcessor
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+integrationTest {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+springBoot {
+    buildInfo {
+        properties {
+            additional = [
+                    'version': System.getProperty("version") != null ? System.getProperty("version") : "unspecified"
+            ]
+        }
+    }
+}
+
+jacocoTestReport {
+    doLast {
+        executionData([test, integrationTest].findAll { it.state.executed })
+    }
+
+    reports {
+        xml.enabled true
+        xml.destination(file("${project.buildDir}/reports/jacoco/all-tests/jacocoAllTestReport.xml"))
+        html.enabled true
+        html.destination file("${project.buildDir}/reports/jacoco/all-tests/html")
+    }
+}

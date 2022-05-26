@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body>
+
+<main class="body">
+    <header th:replace="~{_fragments :: #header}"></header>
+    <div class="container">
+        <h2 th:text="#{fudosan.create.account.verify}"></h2>
+        <p th:text="#{fudosan.create.account.success}"></p>
+
+        <a th:text="#{fudosan.create.account.back}" href="/login"></a>
+    </div>
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+</body>
+</html>

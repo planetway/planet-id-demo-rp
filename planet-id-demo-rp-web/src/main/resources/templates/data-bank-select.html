@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body>
+<main class="body">
+    <header th:replace="~{_fragments :: #header}"></header>
+
+    <p th:utext="#{fudosan.selectcurrent.selectagent}"></p>
+
+    <script th:inline="javascript">
+        let language = /*<![CDATA[*/ /*[[${#locale.language}]]*/ /*]]>*/;
+        let selectedDataBankName;
+        function setSelectedDataBankName(event) {
+            // reset remove active class
+            const dataBankEls = document.getElementsByClassName('data-bank');
+            for(let i = 0; i < dataBankEls.length; i++) {
+                dataBankEls.item(i).classList.remove('active');
+            }
+            let li;
+            if (event.target.localName === 'li') {
+                li = event.target;
+            } else {
+                // direct child was clicked
+                li = event.target.parentNode;
+            }
+            li.classList.add('active');
+            selectedDataBankName = li.dataset.name;
+            document.getElementById("request-data-btn").removeAttribute("disabled");
+        }
+
+        function requestData() {
+            document.getElementById('loader').style.display = '';
+            document.getElementById("request-data-btn").setAttribute('disabled', 'disabled');
+            fetch('/api/data-bank/' + selectedDataBankName + '/person')
+                .then(function (response) {
+                    console.log(response);
+                    if (!response.ok) {
+                        // assume no consent if status code not 2xx
+                        return null;
+                    } else {
+                        return response.json();
+                    }
+                })
+                .then(function(json){
+                    if (json === null) {
+                        document.getElementById('btnText').innerText = 'Requesting consent ...';
+                        startConsentFlow(selectedDataBankName);
+                        return;
+                    }
+                    // hachish solution for posting person information to server to render next page
+                    const reviewForm = document.getElementById('personal-info-form');
+                    // databank response has _en or _jp keys
+                    const lang = language === "en" ? "en" : "jp";
+                    [...reviewForm.elements].forEach(input => input.value = json[input.name] || json[input.name + '_' + lang]);
+                    reviewForm.submit();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    window.location.href = '/error'
+                });
+
+        }
+
+        function startConsentFlow(dataBankName) {
+            return fetch('/consent/consent-container/' + dataBankName)
+                .then(function (response) {
+                    return response.text();
+                })
+                .then(function (xml) {
+                    const authForm = document.getElementById('openid-form');
+                    authForm.payload.value = xml;
+                    authForm.submit();
+                });
+        }
+    </script>
+    <ul class="fudosan-select">
+        <li th:each="dataBankName : ${dataBankNames}" th:data-name="${dataBankName}" onclick="setSelectedDataBankName(event)" class="data-bank">
+            <img style="width: 20%;"
+                 th:src="@{/images/data-banks/{fileName}.png(fileName=${dataBankName})}" class="avatar">
+            <span th:text="#{${'fudosan.data-bank.' + dataBankName}}"></span></li>
+    </ul>
+
+    <p class="font-weight-medium" th:text="#{fudosan.selectcurrent.datatoretrieve}">Data to Retrieve</p>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <ul>
+                <li th:text="#{fudosan.name}">Name</li>
+                <li th:text="#{fudosan.phonenumber}">Phone number</li>
+                <li th:text="#{fudosan.dob}">DOB</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul>
+                <li th:text="#{fudosan.address}">Address</li>
+                <li th:text="#{fudosan.bankaccount}">Bank Account</li>
+                <li th:text="#{fudosan.employer}">Employer</li>
+            </ul>
+        </div>
+    </div>
+
+    <button id="request-data-btn" class="btn btn-primary" disabled onclick="requestData()">
+        <span id="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none"></span>
+        <span id="btnText" th:text="#{fudosan.selectcurrent.retrievemydata}"></span>
+    </button>
+    <div style="display: none;" class="spinner-border text-primary" ></div>
+
+    <form id="openid-form" method="post" action="/redirect-to-pcore">
+        <div style="display: none">
+            <input name="client_id" type="text" th:value="${authRequest.clientId}">
+            <input name="state" type="text" th:value="${authRequest.state}">
+            <input name="nonce" type="text" th:value="${authRequest.nonce}">
+            <input name="redirect_uri" type="text" th:value="${authRequest.redirectUri}">
+            <input name="action" type="text" th:value="${authRequest.action}">
+            <input name="level" type="text" th:value="${authRequest.level}">
+            <input name="scope" type="text" th:value="${authRequest.scope}">
+            <input name="response_type" type="text" th:value="${authRequest.responseType}">
+            <input name="planet_id" type="text" th:value="${authRequest.planetId}">
+            <input name="payload" type="text">
+        </div>
+    </form>
+
+    <form style="display: none" id="personal-info-form" method="POST" th:action="@{'/property/contract-review'}">
+        <input name="name" type="text">
+        <input name="dob" type="text">
+        <input name="address" type="text">
+        <input name="phone" type="text">
+        <input name="bank_account" type="text">
+        <input name="employer" type="text">
+    </form>
+
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+</body>
+</html>

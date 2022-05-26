@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body>
+<main class="body">
+    <header th:replace="~{_fragments :: #header}"></header>
+
+    <div class="container text-center">
+        <h3 th:text="#{fudosan.settings}"></h3>
+
+        <div th:unless="${#authentication.getPrincipal().getPlanetId()}">
+            <form id="link-planet-id" method="post" action="/redirect-to-pcore">
+                <button class="btn btn-primary wide-button"
+                        type="submit"
+                        th:text="#{fudosan.linkplanetid.openid}">
+                    <i class="fas fa-long-arrow-right"></i></button>
+                <div style="display: none">
+                    <input name="client_id" type="text" th:value="${authRequest.clientId}">
+                    <input name="state" type="text" th:value="${authRequest.state}">
+                    <input name="nonce" type="text" th:value="${authRequest.nonce}">
+                    <input name="redirect_uri" type="text" th:value="${authRequest.redirectUri}">
+                    <input name="action" type="text" th:value="${authRequest.action}">
+                    <input name="level" type="text" th:value="${authRequest.level}">
+                    <input name="scope" type="text" th:value="${authRequest.scope}">
+                    <input name="response_type" type="text" th:value="${authRequest.responseType}">
+                </div>
+            </form>
+        </div>
+
+        <form th:if="${#authentication.getPrincipal().getPlanetId()}" id="unlink_form_post" method="post" th:action="@{'/user/unlink'}"
+              onsubmit="return confirmSubmit('Are you sure you want to unlink your Planet ID?', 'unlink_form_post');">
+            <button class="btn btn-primary wide-button"
+                    type="submit"
+                    th:text="#{fudosan.unlinkplanetid}">
+                <i class="fas fa-long-arrow-right"></i></button>
+        </form>
+
+        <div th:if="${#authentication.getPrincipal().getPlanetId()}">
+            <button type="button" onclick="showConfirm()" class="btn btn-primary wide-button" th:text="#{fudosan.button.lra}"></button>
+        </div>
+
+        <button disabled type="button" class="btn btn-primary wide-button" th:text="#{fudosan.settings.change.password}"></button>
+
+        <form id="delete_rp_account" method="post" th:action="@{'/user/delete'}"
+              onsubmit="return confirmSubmit('Are you sure you want to delete your account?', 'delete_rp_account');">
+            <button class="btn btn-primary wide-button"
+                    type="submit"
+                    th:text="#{fudosan.settings.delete.account}">
+                <i class="fas fa-long-arrow-right"></i></button>
+        </form>
+        <div th:if="${#authentication.getPrincipal().getPlanetId()}">
+            <button type="button" onclick="window.location.href='/signed-documents'" class="btn btn-primary wide-button" th:text="#{fudosan.button.signed-document-list}"></button>
+        </div>
+        <button type="button" onclick="window.location.href='/'" class="btn btn-primary wide-button" th:text="#{fudosan.back}"></button>
+    </div>
+
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+<script>
+    function confirmSubmit(message, formId) {
+        if (confirm(message) === true) {
+            document.getElementById(formId).submit();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function showConfirm() {
+        if (confirm("Are you sure you want to get verified personal information from LRA?") === true) {
+            window.location.href = '/lra/person';
+        }
+    }
+
+</script>
+</body>
+</html>

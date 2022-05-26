@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">不動産デモアプリ</string>
+    <string name="something_went_wrong">エラーが発生しました</string>
+    <string name="invalid_username">有効なメールアドレスを入力してください</string>
+    <string name="invalid_password">パスワードは少なくとも5文字必要で す</string>
+    <string name="passwords_dont_match">パスワードが一致しません</string>
+    <string name="login">ログイン</string>
+    <string name="email">メールアドレス</string><string name="email_demo_no_verification">デモアプリではメールアドレス認証機能を使わないことにご注意ください</string>
+    <string name="password">パスワード</string>
+    <string name="verify_password">パスワード（確認）</string>
+    <string name="forgot_password">パスワードを忘れた場合</string>
+    <string name="sign_up">新規登録</string>
+    <string name="sign">電子署名して申込み</string>
+    <string name="back_to_login">ログインに戻る</string>
+    <string name="login_planetid">PlanetIDログイン</string>
+    <string name="login_id_password">ID・パスワードログイン</string>
+    <string name="login_failed"> ユーザー名またはパスワードが正しくありません。</string>
+    <string name="login_success">ログインに成功しました</string>
+    <string name="success">成功した</string>
+    <string name="log_out">ログアウト</string>
+    <string name="apply">申し込み</string>
+    <string name="next">次へ</string>
+    <string name="account_created">アカウントが作成されました。</string>
+    <string name="account_linking">準備中</string>
+    <string name="account_linked">このアカウントはPlanetIDとリンクされました。</string>
+    <string name="my_account">アカウント情報</string>
+    <string name="create_account">新規アカウントの作成 </string>
+    <string name="delete_account">アカウントの削除</string>
+    <string name="delete_account_confirmation">このアカウントを削除しますか。一度削除すると全てのデータを消失します。</string>
+    <string name="link_with_planet_id"> PlanetIDをリンクする</string>
+    <string name="unlink_with_planet_id"> PlanetIDのリンク削除</string>
+    <string name="unlink_confirmation">このPlanet IDのリンクを削除しますか。</string>
+    <string name="planet_id_not_linked">このPlanet IDがリンクされているアカウントを見つかりませんでした。ID・パスワードでログインして、アカウント情報ページでPlanet IDをリンクしてください。赤坂不動産のアカウントを登録していない場合は、まず新規登録を行ってください</string>
+    <string name="error">エラー</string>
+    <string name="planet_id_app_not_installed">エラー！Planet IDを持っていない場合は、App storeまたはGoogle　Playからアプリをダウンロードすることができます。赤坂不動産のアカウントを登録していない場合は、まず新規登録を行ってください</string>
+    <string name="personal_data_from_lra">LRAから個人情報を取得</string>
+    <string name="personal_data_allow">LRAから個人情報を取得することを許可します。</string>
+    <string name="personal_data_obtained">取得情報一覧</string>
+    <string name="label_name_romaji">名前（ローマ字）:(</string>
+    <string name="label_name_katakana">名前（カタカナ）:</string>
+    <string name="label_name_kanji">名前（漢字）:</string>
+    <string name="label_birth_date">生年月日:</string>
+    <string name="label_address">住所</string>
+    <string name="full_name">名前</string>
+    <string name="birth_date">生年月日</string>
+    <string name="address">住所</string>
+    <string name="address_example">東京都千代田区丸の内</string>
+    <string name="phone_number">電話番号</string>
+    <string name="phone_number_example"> 03-5789-4325</string>
+    <string name="bank_account"> 銀行口座</string>
+    <string name="bank_account_example">324-3874113</string>
+    <string name="employer">勤務先</string>
+    <string name="employer_example">株式会社レジデンス</string>
+    <string name="name">名前</string>
+    <string name="name_example">島田 裕子</string>
+    <string name="dob">DOB誕生日</string>
+    <string name="dob_example">1972/01/10</string>
+    <string name="review_your_info">取得された個人情報の内容をご確認下さい。また、下記の入居申込書をご確認の上、”署名して申込”ボタンをクリックして下さい。クリックすると、申込書にお客様のデジタル署名が付与され、申し込みが完了します。</string>
+    <string name="something">管理費・共益費\: 30,000円\n
+        敷金\: 30万円/礼金\: 30万円/保証金\: -/敷引・償却\: -\n
+        所在地\: 東京度港区元赤坂\n
+        駅徒歩\: 銀座線/赤坂見附徒歩1分\n
+        丸ノ内線/赤坂見附徒歩1分\n
+        間取り\: 1LDK\n
+        占有面積\: 50.00 m2\n
+        築年数\: 築2年\n
+        階\: 7階\n
+        向き\: 南西\n
+        建物種別\: マンショ</string>
+    <string name="contract_signed">入居申込書にお客様のデジタル署名が付与され、申し込みが完了しました。</string>
+    <string name="contact_you_soon">不動産会社から今後の手続きについてご連絡致しますので、しばらくお待ち下さい。</string>
+    <string name="select_databank">申し込みに必要なお客様の個人情報をデータバンクから取得できます。 以下からお客様の個人情報を取得するデータバンクを選択して下さい。 取得される個人情報については、”取得情報一覧”をご確認下さい。 下記の”個人情報の取得”ボタンをクリックすると、上で選択したデータバンクが持つお客様の個人情報へアクセスします。 なお、選択されたデータバンクへのアクセスがまだ同意頂けていない場合には、お客様のPlanetIDアプリに同意のリクエストが届きます。アプリ上で同意頂けますと、当サイトから選択されたデータバンクへの個人情報アクセスが開始されます。</string>
+    <string name="databank_smile">スマイルデータバンク</string>
+    <string name="databank_realestate">不動産情報銀行</string>
+    <string name="databank_mori">森情報銀行</string>
+    <string name="databank_tokyo">東京データバンク</string>
+    <string name="data_to_retrieve">取得情報一覧</string>
+    <string name="retrieve_my_data">個人情報の獲得</string>
+    <string name="name_phone_dob">名前\n電話番号\n誕生日 </string>
+    <string name="address_bank_employer"> 現住所\n銀行口座\n勤務先 </string>
+    <string name="planet_id_activities">Planet ID アクティビティ</string>
+    <string name="personal_data_from_lra_success">個人データが取得されました。</string>
+    <string name="unauthorized">権限がありません</string>
+    <string name="network_error">ネットワークエラー</string>
+    <string name="account_deleted">アカウントを削除しました</string>
+    <string name="home">ホーム</string>
+    <string name="account">アカウント</string>
+</resources>

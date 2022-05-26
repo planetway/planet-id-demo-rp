@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body>
+<main class="body">
+    <header th:replace="~{_fragments :: #header}"></header>
+
+    <div class="container text-center">
+        <h3 th:text="#{fudosan.signed-documents}"></h3>
+        <table class="table table-hover" style="margin-left: -56px">
+            <thead>
+            <tr>
+                <th scope="col" th:text="#{fudosan.signed-document.planet-id}"></th>
+                <th scope="col" th:text="#{fudosan.signed-document.signature-type}"></th>
+                <th scope="col" th:text="#{fudosan.signed-document.created-at}"></th>
+                <th scope="col" th:text="#{fudosan.signed-document.has-timestamp}"></th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+            </thead>
+            <th:block th:each="doc : ${docs}">
+                <tr>
+                    <td th:text="${doc.planetId}"></td>
+                    <td th:text="${doc.signatureType}"></td>
+                    <td th:text="${#dates.format(doc.createdAt, 'dd.MM.yyyy HH:mm')}" nowrap></td>
+                    <td th:text="${doc.hasTimestamp} ? 'Yes' : 'No'"></td>
+                    <td>
+                        <a th:href="@{|/signed-documents/${doc.uuid}/refresh|}" th:if="${!doc.hasTimestamp}" th:text="#{fudosan.signed-document.refresh}"></a>
+                        <a th:href="@{|/signed-documents/${doc.uuid}/download|}" th:text="#{fudosan.signed-document.download}"></a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+
+        <button type="button" onclick="window.location.href='/'" class="btn btn-primary" th:text="#{fudosan.back}"></button>
+    </div>
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+</body>
+</html>

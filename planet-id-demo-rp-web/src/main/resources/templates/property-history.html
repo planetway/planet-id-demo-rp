@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body>
+<main class="body">
+    <header th:replace="~{_fragments :: #header}"></header>
+
+    <h4 th:text="#{fudosan.history.h4}"></h4>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{fudosan.history.table.type}"></th>
+            <th scope="col" th:text="#{fudosan.history.table.details}"></th>
+            <th scope="col" th:text="#{fudosan.history.table.created}"></th>
+            <th scope="col" th:text="#{fudosan.history.table.download}"></th>
+        </tr>
+        </thead>
+        <th:block th:each="historyLine : ${history}">
+            <tr>
+                <td th:text="${historyLine.signatureType}">SignatureType</td>
+                <td>
+                    <span th:if="${historyLine.signatureType == 'CONSENT'}"
+                          th:text="${historyLine.dataProvider.get(language)} + ' -> ' + ${historyLine.dataConsumer.get(language)} "></span>
+                    <span th:if="${historyLine.signatureType == 'SIGNING'}" th:text="${historyLine.fileName}"></span>
+                </td>
+                <td th:text="${#dates.format(historyLine.createdAtTimestamp, 'dd.MM.yyyy HH:mm')}"></td>
+                <td>
+                    <span th:if="${historyLine.asiceContainerTimestampedExists}">
+                        <a th:href="|${relyingPartyFullAddress}/container/${historyLine.signedDocumentUUID}|"
+                           th:text="#{fudosan.history.table.download.container}"></a></span>
+                    <span th:unless="${historyLine.asiceContainerTimestampedExists}"
+                          th:text="#{fudosan.history.table.processing}"></span>
+                </td>
+            </tr>
+
+        </th:block>
+    </table>
+
+    <button type="button" onclick="window.location.href='/';" class="btn btn-primary"
+            th:text="#{fudosan.back}"></button>
+
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+</body>
+</html>

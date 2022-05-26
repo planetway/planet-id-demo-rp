@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en" xml:lang="en">
+<head th:replace="~{_fragments :: head}"></head>
+<body>
+<main class="body">
+  <header class="mb-4">
+    <div class="row mb-4" style="margin-right: 0px !important;">
+      <div class="col-md-6">
+        <img class="logo" th:src="@{'/images/fudosan/fudosan-logo-'+${language}+'.png'}"/>
+      </div>
+
+      <div class="col-md-6 controls text-right">
+        <ul class="lang list-inline">
+          <li class="list-inline-item" onclick="window.location.replace('?lang=' + 'en')">English</li>
+          <li class="list-inline-item" onclick="window.location.replace('?lang=' + 'ja')">日本語</li>
+        </ul>
+        <ul class="user list-inline">
+          <li class="list-inline-item">
+            <form id="auth_form_post" method="post" th:action="|${relyingPartyFullAddress}/openid/auth|">
+              <button class="btn btn-primary full-width"
+                      onclick="document.getElementById('auth_form_post').submit()"
+                      th:text="#{fudosan.login}">
+                <i class="fas fa-long-arrow-right"></i></button>
+              <ol style="visibility: hidden; display:none; overflow: hidden; height: 0; padding: 0; margin: 0;">
+                <li><label>scope<input name="scope" type="text" value="openid"></label></li>
+                <li><label>client_id(RelyingPartyId) <input name="client_id" type="text"
+                                                            th:value="${relyingPartyId}"></label></li>
+                <li><label>redirect_uri<input name="redirect_uri"
+                                              th:value="|${relyingPartyFullAddress}/callback/consent|"
+                                              type="text"></label>
+                </li>
+                <li><label>response_type<input name="response_type" type="text" value="code"></label></li>
+                <li><label>nonce<input name="nonce" type="text" th:value="${nonce}"></label></li>
+                <li><label>state<input name="state" type="text" th:value="${state}"></label></li>
+                <li><label>sig_type<input name="sig_type" type="text" value="auth"></label></li>
+                </li>
+
+              </ol>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="row mb-4">
+    <div class="col-md-6"><img src="images/fudosan/photo.png"/></div>
+    <div class="col-md-6">
+      <p th:utext="#{fudosan.index.text}"></p>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" disabled th:text="#{fudosan.apply}"></button>
+
+</main>
+<div th:replace="~{_fragments :: footer}"></div>
+</body>
+</html>
