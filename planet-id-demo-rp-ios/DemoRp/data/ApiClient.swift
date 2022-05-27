@@ -12,7 +12,7 @@ import PlanetIDRP
 #if BUILD_POC
 let DefaultAPI = "https://fudosan.poc2.planet-id.me"
 #else
-let DefaultAPI = "https://fudosan.test.planet-id.me"
+let DefaultAPI = "https://fudosan.prod.planet-id.me"
 #endif
 // DefaultAPI = "http://localhost:8082"
 
