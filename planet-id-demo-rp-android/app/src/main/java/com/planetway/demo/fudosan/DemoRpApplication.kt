@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.google.android.gms.common.api.Api
 import com.planetway.demo.BuildConfig
 import com.planetway.demo.fudosan.data.AccountRepository
 import com.planetway.demo.fudosan.data.ApiConstants
@@ -40,6 +39,7 @@ class DemoRpApplication : Application() {
 
     private fun getApiBaseUrl(): String {
         return when(BuildConfig.FLAVOR_backendUrl) {
+            "backendProd" -> ApiConstants.PROD
             "backendPoc" -> ApiConstants.POC
             "backendTest" -> ApiConstants.TEST
             else -> ApiConstants.ANDROID_HOST
