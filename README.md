@@ -79,6 +79,70 @@ Following information is provided to applicant in return.
 | PlanetID API endpoint | https://api.prod.planet-id.me<br />https://api.poc.planet-id.me	| The base URL for the APIs. Following URL provides the OpenID Connect Provider Configuration Information endpoint according to OpenID Connect Discovery 1.0. API endpoint + ".well-known/openid-configuration" |
 | Consent API endpoint  | https://consent.prod.planet-id.me<br />https://consent.poc.planet-id.me | For checking if a consent exists, is expired or is revoked. |
 
+# Managing linked PlanetIDs
+## Checking if a PlanetID is linked
+
+Using this endpoint the Relying Party can query for a PlanetID.
+
+URL in production: `https://api.prod.planet-id.me/v2/relying-parties/identities/<PlanetID>`
+
+URL in PoC environment: `https://api.poc.planet-id.me/v2/relying-parties/identities/<PlanetID>`
+
+Verb: `GET`
+
+Parameters:
+ * `PlanetID` - the PlanetID of a user.
+
+Example: `https://api.prod.planet-id.me/v2/relying-parties/identities/12345678900`
+
+Output in case the user is linked - HTTP response code `200`
+```json
+{
+	"planetId": "12345678900",
+	"createdAt": "2022-05-30T12:28:45.002+00:00"
+}
+```
+
+Output in case the user is not linked - HTTP response code `404`.
+
+```json
+{ "error": "notFound" }
+```
+
+Output in case the Relying Party cannot be authenticated - HTTP response code `401`
+
+```json
+{ "error": "unauthorized" }
+```
+
+**Authentication:** The client needs to use Basic Authentication scheme. The credentials are the same, as described above (client_id and client_secret)
+
+## Removing a link to a PlanetID
+
+Using this endpoint the Relying Party can query for a PlanetID.
+
+URL in production: `https://api.prod.planet-id.me/v2/relying-parties/identities/<PlanetID>`
+
+URL in PoC environment: `https://api.poc.planet-id.me/v2/relying-parties/identities/<PlanetID>`
+
+Verb: `DELETE`
+
+Parameters:
+ * `PlanetID` - the PlanetID of a user to unlink.
+
+Example: `https://api.prod.planet-id.me/v2/relying-parties/identities/12345678900`
+
+Output in case the user is linked - HTTP response code `204`. No response body (even if the link did not exist before).
+
+Output in case the Relying Party cannot be authenticated - HTTP response code `401`
+
+```json
+{ "error": "unauthorized" }
+```
+
+**Authentication:** The client needs to use Basic Authentication scheme. The credentials are the same, as described above (client_id and client_secret)
+
+
 # Getting consent status
 
 This endpoint is for relying parties who participate in the context of the consent as a provider or as a consumer.
@@ -94,19 +158,25 @@ Parameters:
  * `consumerSubsystemId` - the party who needs the data about the target user. Parameter value format `[Instance code]/[member class]/[member code]/[subsystem code]`. Example: `JP/COM/0170000000001/a-subsystem`
  * `providerServiceId` - the service that provides the data about the target user. Parameter value format `[Instance code]/[member class]/[member code]/[subsystem code]/[service code]`. Example: `JP/COM/0170000000001/b-subsystem/some-service`
 
-Example: https://consent.prod.planet-id.me/v2/relying-parties/consent-status?targetUserId=728449601214&consumerSubsystemId=JP%2FCOM%0170000000001%2Fa-subsystem&providerServiceId=JP%2FCOM%0170000000002%2Fb-subsystem%2Fsome-service
+Example: `https://consent.prod.planet-id.me/v2/relying-parties/consent-status?targetUserId=728449601214&consumerSubsystemId=JP%2FCOM%0170000000001%2Fa-subsystem&providerServiceId=JP%2FCOM%0170000000002%2Fb-subsystem%2Fsome-service`
 
 Output in case the consent exists - HTTP response code `200`
 ```json
-{"consentStatus": "exists"}
+{ "consentStatus": "exists" }
 ```
 
 Output in case the consent does not exist or is revoked - HTTP response code `404`. The response body is one of
 
 ```json
-{"consentStatus": "doesNotExist"}
-{"consentStatus": "revoked"}
-{"consentStatus": "expired"}
+{ "consentStatus": "doesNotExist" }
+{ "consentStatus": "revoked" }
+{ "consentStatus": "expired" }
+```
+
+Output in case the Relying Party cannot be authenticated - HTTP response code `401`
+
+```json
+{ "error": "unauthorized" }
 ```
 
 **Authentication:** The client needs to use Basic Authentication scheme. The credentials are the same, as described above (client_id and client_secret)
