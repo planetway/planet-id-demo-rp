@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.UUID;
+
 import static org.springframework.context.i18n.LocaleContextHolder.getLocale;
 
 @Slf4j
@@ -51,9 +53,11 @@ public class LraPersonController {
         } catch (NoConsentException e) {
             // Build consent document for RA and redirect user to sign it.
             String redirectUri = appProperties.getBaseUrl() + "/callback/consent";
-            String consentDocumentPayload = consentContainerService.createConsentContainerForRa(userInfo.getPlanetId());
+            UUID consentId = UUID.randomUUID();
+            String consentDocumentPayload = consentContainerService.createConsentContainerForRa(userInfo.getPlanetId(), consentId);
             AuthRequest authRequest = openIdSupport.createRequestForConsent(response, redirectUri, userInfo.getPlanetId(), consentDocumentPayload);
             response.addCookie(new Cookie("get_person_info", "1"));
+            response.addCookie(new Cookie("consent_uuid", consentId.toString()));
 
             modelAndView.addObject("authRequest", authRequest);
         } catch (RuntimeException e) {

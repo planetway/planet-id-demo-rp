@@ -88,6 +88,9 @@ class MyAccountFragment : Fragment() {
             textLinkWithPlanetID.setOnClickListener { linkWithPlanetID() }
             textUnlinkWithPlanetID.setOnClickListener { showUnlinkAlert() }
             textPersonalDataFromLra.setOnClickListener { personalDataFromLra() }
+            textSignedDocumentList.setOnClickListener {
+                findNavController().navigate(R.id.action_myAccountFragment_to_signedDocumentsFragment)
+            }
             textDeleteAccount.setOnClickListener { showDeleteAccountAlert() }
         }
 

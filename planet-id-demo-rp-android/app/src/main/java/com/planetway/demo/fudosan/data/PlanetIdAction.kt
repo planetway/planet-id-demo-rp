@@ -6,7 +6,8 @@ enum class PlanetIdAction(val action: String) {
     ACTION_LINK("link-planet-id"),
     ACTION_DATA_BANK_CONSENT("data-bank-consent"),
     ACTION_SIGN("document-sign"),
-    ACTION_LRA_CONSENT("lra-consent");
+    ACTION_LRA_CONSENT("lra-consent"),
+    ACTION_CONSENT_REVOKE("consent-revoke");
 
     override fun toString(): String {
         return action

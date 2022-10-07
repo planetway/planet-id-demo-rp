@@ -84,4 +84,6 @@ Direction: Southwest</string>
     <string name="account_deleted">Account deleted successfully</string>
     <string name="home">Home</string>
     <string name="account">Account</string>
+    <string name="signed_documents">Signed Documents</string>
+    <string name="revoke_button_txt">Revoke</string>
 </resources>

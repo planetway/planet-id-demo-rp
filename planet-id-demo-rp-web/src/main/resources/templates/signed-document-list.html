@@ -20,7 +20,7 @@
             </tr>
             </thead>
             <th:block th:each="doc : ${docs}">
-                <tr>
+                <tr th:if="${doc.revokeDocumentUuid == null}">
                     <td th:text="${doc.planetId}"></td>
                     <td th:text="${doc.signatureType}"></td>
                     <td th:text="${#dates.format(doc.createdAt, 'dd.MM.yyyy HH:mm')}" nowrap></td>
@@ -28,7 +28,15 @@
                     <td>
                         <a th:href="@{|/signed-documents/${doc.uuid}/refresh|}" th:if="${!doc.hasTimestamp}" th:text="#{fudosan.signed-document.refresh}"></a>
                         <a th:href="@{|/signed-documents/${doc.uuid}/download|}" th:text="#{fudosan.signed-document.download}"></a>
+                        <a th:if="${doc.signatureType == 'CONSENT' && #authentication.getPrincipal().getPlanetId() == doc.planetId}" th:href="@{|/signed-documents/${doc.uuid}/revoke|}" th:text="#{fudosan.consent.revoke}"></a>
                     </td>
+                </tr>
+                <tr th:if="${doc.revokeDocumentUuid != null}">
+                    <td th:text="${doc.planetId}"></td>
+                    <td th:text="${doc.signatureType}"></td>
+                    <td th:text="${#dates.format(doc.createdAt, 'dd.MM.yyyy HH:mm')}" nowrap></td>
+                    <td th:text="${doc.hasTimestamp} ? 'Yes' : 'No'"></td>
+                    <td>REVOKED</td>
                 </tr>
             </th:block>
         </table>

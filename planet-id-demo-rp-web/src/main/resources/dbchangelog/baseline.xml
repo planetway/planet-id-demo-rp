@@ -10,7 +10,9 @@
     <changeSet id="0002_create_signed_documents" author="margus">
         <sqlFile path="sql/0002_create_signed_documents.sql" relativeToChangelogFile="true"/>
     </changeSet>
-
+    <changeSet id="0003_revoked_uuid_to_signed_documents" author="margus">
+        <sqlFile path="sql/0003_revoked_uuid_to_signed_documents.sql" relativeToChangelogFile="true"/>
+    </changeSet>
     <!-- user_grants changeset shall be run last -->
     <changeSet id="user_grants" author="baseline" runAlways="true">
         <sqlFile path="sql/9000-grants.sql" relativeToChangelogFile="true"/>

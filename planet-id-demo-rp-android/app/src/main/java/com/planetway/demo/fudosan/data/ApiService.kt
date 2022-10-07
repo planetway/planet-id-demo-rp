@@ -45,6 +45,9 @@ interface ApiService {
     @POST("/api/data-bank/{dataBank}/consent")
     fun dataBankConsent(@Path("dataBank") dataBank: String, @Query("lang") language: String): Call<AuthRequest>
 
+    @GET("/api/revoke-consent-request")
+    fun getConsentRevokeRequest(@Query("consentUuid") consentUuid: String): Call<AuthRequest>
+
     @Multipart
     @POST("/api/document/sign")
     fun sign(@Part file: MultipartBody.Part, @Query("lang") language: String): Call<AuthRequest>
@@ -60,4 +63,7 @@ interface ApiService {
 
     @POST("/api/lra/consent")
     fun lraConsent(@Query("lang") language: String): Call<AuthRequest>
+
+    @GET("/api/signed-documents")
+    fun getSignedDocuments(): Call<List<SignedDocument>>
 }

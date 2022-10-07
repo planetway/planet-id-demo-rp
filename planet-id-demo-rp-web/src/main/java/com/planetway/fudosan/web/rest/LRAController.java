@@ -14,7 +14,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.UUID;
 
 import static org.springframework.context.i18n.LocaleContextHolder.getLocale;
 
@@ -49,7 +52,8 @@ public class LRAController {
                                            @RequestParam(required = false, value = "lang") String language,
                                            HttpServletResponse response) {
         String planetId = userInfo.getPlanetId();
-        String consentDocument = consentContainerService.createConsentContainerForRa(planetId);
+        UUID consentUuid = UUID.randomUUID();
+        String consentDocument = consentContainerService.createConsentContainerForRa(planetId, consentUuid);
         String redirectUri = appProperties.getBaseUrl() + "/api/callback/consent";
         return openIdSupport.createRequestForConsent(response, redirectUri, planetId, consentDocument);
     }

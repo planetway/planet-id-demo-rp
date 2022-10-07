@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_myAccountFragment_to_dataFromLraFragment"
             app:destination="@id/dataFromLraFragment" />
+        <action
+            android:id="@+id/action_myAccountFragment_to_signedDocumentsFragment"
+            app:destination="@id/signedDocumentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/linkPlanetIdFragment"
@@ -83,4 +86,9 @@
         android:id="@+id/dataFromLraSuccessFragment"
         android:name="com.planetway.demo.fudosan.ui.accountsettings.myaccount.datafromlra.DataFromLraSuccessFragment"
         android:label="DataFromLraSuccessFragment" />
+    <fragment
+        android:id="@+id/signedDocumentsFragment"
+        android:name="com.planetway.demo.fudosan.ui.accountsettings.signeddocuments.SignedDocumentsFragment"
+        android:label="fragment_signed_documents"
+        tools:layout="@layout/fragment_signed_documents" />
 </navigation>

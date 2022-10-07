@@ -15,6 +15,7 @@ class AccountSettingsViewController: UIViewController {
     
     @IBOutlet weak var linkWithPlanetIdText: UIButton!
     @IBOutlet weak var dataFromLraButton: UIButton!
+    @IBOutlet weak var signedDocumentsButton: UIButton!
     
     override func viewDidLoad() {
         self.dataFromLraButton.setTitleColor(UIColor.lightGray, for: .disabled)

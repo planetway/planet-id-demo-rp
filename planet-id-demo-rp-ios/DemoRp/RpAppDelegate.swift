@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  DemoRp
@@ -35,6 +36,8 @@ class RpAppDelegate: UIResponder, UIApplicationDelegate {
             handleLinkPlanetId(urlComponents!)
         } else if action == "data-bank-consent" {
             handleDataBankConsent(urlComponents!)
+        } else if action == "consent-revoke" {
+            handleConsentRevoke(urlComponents!)
         } else if action == "document-sign" {
             handleDocumentSign(urlComponents!)
         } else if action == "lra-consent" {
@@ -82,6 +85,22 @@ class RpAppDelegate: UIResponder, UIApplicationDelegate {
         
         mainController.selectedIndex = accountTabIndex
         applyViewController.callbackUrl = urlComponents
+        
+        self.window?.rootViewController = mainController
+    }
+    
+    private func handleConsentRevoke(_ urlComponents: URLComponents) {
+        let accountTabIndex = 1
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let mainController: UITabBarController = storyBoard.instantiateViewController(withIdentifier: "Main") as! UITabBarController
+        let navigationController = mainController.viewControllers![accountTabIndex] as! UINavigationController
+        let signedDocumentsViewController = storyBoard.instantiateViewController(withIdentifier: "SignedDocuments") as! SignedDocumentsViewController
+        signedDocumentsViewController.callbackUrl = urlComponents
+        
+        navigationController.pushViewController(signedDocumentsViewController, animated: false)
+        
+        mainController.selectedIndex = accountTabIndex
         
         self.window?.rootViewController = mainController
     }

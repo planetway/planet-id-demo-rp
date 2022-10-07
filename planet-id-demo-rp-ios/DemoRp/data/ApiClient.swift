@@ -12,7 +12,7 @@ import PlanetIDRP
 #if BUILD_POC
 let DefaultAPI = "https://fudosan.poc2.planet-id.me"
 #else
-let DefaultAPI = "https://fudosan.prod.planet-id.me"
+let DefaultAPI = "https://fudosan.test.planet-id.me"
 #endif
 // DefaultAPI = "http://localhost:8082"
 
@@ -70,6 +70,21 @@ class ApiClient {
         postJson("/api/callback/consent", authResponse, onComplete)
     }
     
+    func getConsentRevokeRequest(consentUuid: String, _ onComplete: @escaping (AuthRequest?, Any?) -> Void) {
+        var components = URLComponents(string: "\(DefaultAPI)/api/revoke-consent-request")!
+        components.queryItems = [
+            URLQueryItem(name: "consentUuid", value: consentUuid)
+        ]
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "GET"
+        
+        performRequest(request, onComplete)
+    }
+    
+    func revokeConsentCallback(_ authResponse: AuthResponse, _ onComplete: @escaping (Empty?, Any?) -> Void) {
+        postJson("/api/callback/consent-revoke", authResponse, onComplete)
+    }
+    
     func sign(document: String, _ onComplete: @escaping (AuthRequest?, Any?) -> Void) {
         postMultipart("/api/document/sign", document.data(using: .utf8)!, onComplete)
     }
@@ -86,6 +101,10 @@ class ApiClient {
         post("/api/lra/consent", onComplete)
     }
 
+    func getSignedDocuments(_ onComplete: @escaping ([SignedDocument]?, Any?) -> Void) {
+        get("/api/signed-documents", onComplete)
+    }
+    
     private func url(_ endpoint: String) -> URL {
         return URL(string: DefaultAPI)!.appendingPathComponent(endpoint)
     }

@@ -35,6 +35,8 @@
 		0CCF593123ED952F00AAA0E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CCF592F23ED952F00AAA0E9 /* Main.storyboard */; };
 		0CCF593323ED953200AAA0E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CCF593223ED953200AAA0E9 /* Assets.xcassets */; };
 		0CCF593623ED953200AAA0E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CCF593423ED953200AAA0E9 /* LaunchScreen.storyboard */; };
+		50311B1E28D4D71A0057E43C /* SignedDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50311B1D28D4D71A0057E43C /* SignedDocumentsViewController.swift */; };
+		50311B2028D5BACC0057E43C /* SignedDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50311B1F28D5BACC0057E43C /* SignedDocument.swift */; };
 		C239235824F66598001006F5 /* PlanetIDRP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF23A924F55057002BA87B /* PlanetIDRP.framework */; };
 		C239235924F66598001006F5 /* PlanetIDRP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C2EF23A924F55057002BA87B /* PlanetIDRP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -101,6 +103,8 @@
 		0CCF593223ED953200AAA0E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CCF593523ED953200AAA0E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CCF593723ED953200AAA0E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50311B1D28D4D71A0057E43C /* SignedDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedDocumentsViewController.swift; sourceTree = "<group>"; };
+		50311B1F28D5BACC0057E43C /* SignedDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedDocument.swift; sourceTree = "<group>"; };
 		C2EF23A424F55056002BA87B /* PlanetIDRP.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlanetIDRP.xcodeproj; path = PlanetIDRP/PlanetIDRP.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +170,7 @@
 				0C8DCECB2420EF7700AB6D1F /* ApiError.swift */,
 				0C8DCED32423B0CF00AB6D1F /* Person.swift */,
 				0C80AB2B2423ECD5001C4791 /* Address.swift */,
+				50311B1F28D5BACC0057E43C /* SignedDocument.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				0C9844D923F3F1EF00208B30 /* AccountSettingsViewController.swift */,
 				0C8DCED12423ADC000AB6D1F /* DataFromLraViewController.swift */,
 				0C80AB2D2423F1BE001C4791 /* DataFromLraSuccessViewController.swift */,
+				50311B1D28D4D71A0057E43C /* SignedDocumentsViewController.swift */,
 			);
 			path = account;
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 				0CCF592E23ED952F00AAA0E9 /* AccountViewController.swift in Sources */,
 				0C9844D823F2FF1000208B30 /* UIExtensions.swift in Sources */,
 				0C8DCED02422B30300AB6D1F /* PlanetIdActionInvocationError.swift in Sources */,
+				50311B2028D5BACC0057E43C /* SignedDocument.swift in Sources */,
 				0C8DCED42423B0CF00AB6D1F /* Person.swift in Sources */,
 				0C8DCED22423ADC000AB6D1F /* DataFromLraViewController.swift in Sources */,
 				0C9844C923F17DFC00208B30 /* ApiClient.swift in Sources */,
@@ -352,6 +359,7 @@
 				0CCF592C23ED952F00AAA0E9 /* HomeViewController.swift in Sources */,
 				0C9844D623F2CBEC00208B30 /* main.swift in Sources */,
 				0C9844DE23F4123100208B30 /* ApplyViewController.swift in Sources */,
+				50311B1E28D4D71A0057E43C /* SignedDocumentsViewController.swift in Sources */,
 				0CCF592823ED952F00AAA0E9 /* RpAppDelegate.swift in Sources */,
 				0C9844D423F2CBE400208B30 /* RpApp.swift in Sources */,
 				0C9844E623F4569200208B30 /* Empty.swift in Sources */,
@@ -439,7 +447,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -494,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -589,7 +597,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

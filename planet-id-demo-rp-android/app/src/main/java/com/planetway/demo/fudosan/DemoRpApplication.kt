@@ -15,8 +15,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DemoRpApplication : Application() {
 
+    private val baseUrl = when(BuildConfig.FLAVOR_backendUrl) {
+        "backendProd" -> ApiConstants.PROD
+        "backendPoc" -> ApiConstants.POC
+        "backendTest" -> ApiConstants.TEST
+        else -> ApiConstants.ANDROID_HOST
+    }
+
     val apiService: ApiService = Retrofit.Builder()
-        .baseUrl(getApiBaseUrl())
+        .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .client(
             OkHttpClient().newBuilder()
@@ -35,15 +42,6 @@ class DemoRpApplication : Application() {
         super.onCreate()
 
         accountRepository = AccountRepository(apiService)
-    }
-
-    private fun getApiBaseUrl(): String {
-        return when(BuildConfig.FLAVOR_backendUrl) {
-            "backendProd" -> ApiConstants.PROD
-            "backendPoc" -> ApiConstants.POC
-            "backendTest" -> ApiConstants.TEST
-            else -> ApiConstants.ANDROID_HOST
-        }
     }
 
     class LoggingInterceptor : Interceptor {

@@ -85,4 +85,6 @@
     <string name="account_deleted">アカウントを削除しました</string>
     <string name="home">ホーム</string>
     <string name="account">アカウント</string>
+    <string name="signed_documents">Signed Documents</string>
+    <string name="revoke_button_txt">無効化する</string>
 </resources>

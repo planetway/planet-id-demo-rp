@@ -13,7 +13,7 @@
  */
 public struct AuthRequest : Codable {
     // Required
-    public var action: Action
+    public var action: String
     // Required
     // client_id is the OAuth 2.0 client identifier.
     public var client_id: String
@@ -47,9 +47,8 @@ public struct AuthRequest : Codable {
         urlComponents.host = "auth"
         var items :[URLQueryItem] = [
             URLQueryItem(name: "client_id", value: self.client_id),
-            URLQueryItem(name: "signature_type", value: self.action.signatureType), // TODO do we need this ?
             URLQueryItem(name: "scope", value: self.scope),
-            URLQueryItem(name: "action", value: self.action.rawValue),
+            URLQueryItem(name: "action", value: self.action),
             URLQueryItem(name: "redirect_uri", value: self.redirect_uri),
             URLQueryItem(name: "response_type", value: self.response_type),
             URLQueryItem(name: "nonce", value: self.nonce),
@@ -62,24 +61,5 @@ public struct AuthRequest : Codable {
         }
         urlComponents.queryItems = items
         return urlComponents.url!
-    }
-}
-
-public enum Action :String, Codable {
-    case authenticate
-    case consent
-    case sign
-    
-    var signatureType :String {
-        get {
-            switch self {
-            case .authenticate:
-                return "AUTHENTICATION"
-            case .consent:
-                return "CONSENT"
-            case .sign:
-                return "SIGNING"
-            }
-        }
     }
 }

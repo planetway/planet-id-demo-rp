@@ -115,4 +115,14 @@ class UserRepository {
             onComplete(lraPerson, nil)
         }
     }
+    
+    func getSignedDocuments(_ onComplete: @escaping ([SignedDocument]?, Any?) -> Void) {
+        ApiClient.shared.getSignedDocuments() { signedDocuments, error in
+            guard error == nil else {
+                return onComplete(nil, error)
+            }
+            
+            onComplete(signedDocuments, nil)
+        }
+    }
 }

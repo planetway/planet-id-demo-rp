@@ -33,6 +33,7 @@ class AppLinkActivity : AppCompatActivity() {
                     })
             }
             PlanetIdAction.ACTION_DATA_BANK_CONSENT.action,
+            PlanetIdAction.ACTION_CONSENT_REVOKE.action,
             PlanetIdAction.ACTION_SIGN.action,
             PlanetIdAction.ACTION_LRA_CONSENT.action,
             PlanetIdAction.ACTION_LINK.action -> {
@@ -46,7 +47,7 @@ class AppLinkActivity : AppCompatActivity() {
                     })
             }
             else -> {
-                Log.e("", "Unknown callback uri $uri.")
+                Log.e("", "Unhandled callback uri $uri.")
             }
         }
     }

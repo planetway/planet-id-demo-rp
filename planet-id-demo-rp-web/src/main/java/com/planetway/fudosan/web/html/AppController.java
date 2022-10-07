@@ -20,8 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.springframework.context.i18n.LocaleContextHolder.getLocale;
-
 @Slf4j
 @RequiredArgsConstructor
 @Controller("htmlAppController")

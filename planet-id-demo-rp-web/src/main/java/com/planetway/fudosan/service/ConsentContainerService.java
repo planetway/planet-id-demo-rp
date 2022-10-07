@@ -3,6 +3,7 @@ package com.planetway.fudosan.service;
 import com.planetway.fudosan.configuration.AppProperties;
 import com.planetway.fudosan.configuration.RaProperties;
 import com.planetway.fudosan.domain.ConsentContainerRequest;
+import com.planetway.fudosan.domain.ConsentRevokeDocument;
 import com.planetway.fudosan.domain.DataBank;
 import com.planetway.fudosan.xml.consent.ConsentDocument;
 import com.planetway.fudosan.xml.consent.DataConsumer;
@@ -15,9 +16,6 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 import java.io.StringWriter;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
@@ -27,7 +25,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class ConsentContainerService {
-    private static final JAXBContext jaxbContext = createJaxbContext(ConsentDocument.class);
+    private final JAXBContext jaxbContext = createJaxbContext(ConsentDocument.class, ConsentRevokeDocument.class);
 
     private final Marshaller marshaller = jaxbContext.createMarshaller();
     private final AppProperties appProperties;
@@ -39,10 +37,11 @@ public class ConsentContainerService {
         this.raProperties = raProperties;
         this.pcoreProperties = pcoreProperties;
         marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+        // marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
     }
 
-    private static JAXBContext createJaxbContext(Class... contextClasses) {
+    private JAXBContext createJaxbContext(Class... contextClasses) {
         try {
             return JAXBContext.newInstance(contextClasses);
         } catch (Exception e) {
@@ -62,12 +61,28 @@ public class ConsentContainerService {
         return marshalDocumentToString(consentDocument);
     }
 
-    public String createConsentContainerForRa(String planetId) {
+    public String createConsentRevokeDocument(String consentUUID, String planetId) {
+        ConsentRevokeDocument doc = new ConsentRevokeDocument();
+        doc.setRequestUUID(generateUUID().toString());
+        doc.setConsentUUID(consentUUID);
+        doc.setTargetUserId(planetId);
+
+        StringWriter stringWriter = new StringWriter();
+        try {
+            marshaller.marshal(doc, stringWriter);
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return stringWriter.toString();
+    }
+
+    public String createConsentContainerForRa(String planetId, UUID consentId) {
         ConsentDocument consentDocument = new ConsentDocument();
         consentDocument.setSignRequestType("consent_give");
-        UUID uuid = UUID.randomUUID();
-        consentDocument.setRequestUUID(uuid);
-        consentDocument.setRequestURI(pcoreProperties.getUrl() + "?uuid=" + uuid.toString());
+
+        consentDocument.setRequestUUID(consentId);
+        consentDocument.setRequestURI(pcoreProperties.getUrl() + "?uuid=" + consentId.toString());
         consentDocument.setValidTill(OffsetDateTime.now().plus(1, ChronoUnit.YEARS));
         consentDocument.setRevokable(true);
 
@@ -141,12 +156,11 @@ public class ConsentContainerService {
     private String marshalDocumentToString(ConsentDocument document) {
         StringWriter stringWriter = new StringWriter();
         try {
-            XMLStreamWriter xmlStreamWriter = XMLOutputFactory.newFactory().createXMLStreamWriter(stringWriter);
-            xmlStreamWriter.writeStartDocument("UTF-8", "1.0");
-            marshaller.marshal(document, xmlStreamWriter);
-        } catch (JAXBException | XMLStreamException e) {
+            marshaller.marshal(document, stringWriter);
+        } catch(Exception e) {
             throw new RuntimeException(e);
         }
+
         return stringWriter.toString();
     }
 

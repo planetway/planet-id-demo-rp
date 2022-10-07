@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_fudosan_logo_ja"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fudosan.ui.LoginActivity">
+        <activity android:name=".fudosan.ui.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".fudosan.ui.MainActivity" />
-        <activity android:name=".fudosan.ui.AppLinkActivity">
+        <activity android:name=".fudosan.ui.AppLinkActivity"
+            android:exported="true">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -37,6 +39,9 @@
                     android:scheme="fudosandemorp" />
                 <data
                     android:host="data-bank-consent"
+                    android:scheme="fudosandemorp" />
+                <data
+                    android:host="consent-revoke"
                     android:scheme="fudosandemorp" />
                 <data
                     android:host="document-sign"

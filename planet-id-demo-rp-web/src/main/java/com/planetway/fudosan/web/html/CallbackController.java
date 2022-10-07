@@ -112,6 +112,22 @@ public class CallbackController {
         }
     }
 
+    @GetMapping("consent-revoke")
+    public String consentRevokeCallback(@AuthenticationPrincipal UserInfo userInfo,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response,
+                                  @RequestParam String code,
+                                  @RequestParam String state) {
+        // this callback is shared between getting info from data banks and LRA
+        try {
+            handleCallback(userInfo, request, response, code, state, "/callback/consent-revoke");
+        } catch (Exception e) {
+            log.error("Could not exchange code: {}", e.getMessage());
+            return "redirect:/error";
+        }
+        return "redirect:/signed-documents";
+    }
+
     private TokenResponse handleCallback(UserInfo userInfo, HttpServletRequest request, HttpServletResponse response, String code, String state, String redirectPath) {
         String redirectUri = appProperties.getBaseUrl() + redirectPath;
 
@@ -131,6 +147,11 @@ public class CallbackController {
             doc.setData(tokenResponse.getSignedContainer());
             doc.setUuid(tokenResponse.getPayloadUuid());
             doc.setHasTimestamp(tokenResponse.isSignedContainerTimestamped());
+            doc.setConsentUuid(tokenResponse.getConsentUuid());
+            signedDocumentRepository.save(doc);
+        } else if ("/callback/consent-revoke".equals(redirectPath)){
+            SignedDocumentEntity doc = signedDocumentRepository.findByConsentUuid(tokenResponse.getConsentUuid());
+            doc.setRevokeDocumentUuid(tokenResponse.getPayloadUuid());
             signedDocumentRepository.save(doc);
         }
 

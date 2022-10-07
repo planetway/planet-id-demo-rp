@@ -6,14 +6,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 30
-    dataBinding {
-        enabled = true
-    }
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
 
     signingConfigs {
         release {
-            storeFile file("../upload-keystore.jks")
+            storeFile file("../../upload-keystore.jks")
             storePassword "changeit"
             keyAlias "upload"
             keyPassword "changeit"
@@ -24,9 +22,9 @@ android {
     defaultConfig {
         applicationId "com.planetway.demo.fudosan"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode = System.getenv('BUILD_NUMBER')?.toInteger() ?: 1
-        versionName "1.0." + (System.getenv('BUILD_NUMBER') ?: 0)
+        versionName "1.1." + (System.getenv('BUILD_NUMBER') ?: 0)
         archivesBaseName = "demo-fudosan-app-$versionName"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,8 +32,18 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            firebaseAppDistribution {
+//                serviceCredentialsFile = "service-credentials-planetway-fudosan.json"
+                releaseNotesFile = "releasenotes.txt"
+                groups = "planetway"
+            }
         }
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 
     flavorDimensions "backendUrl", "version"
@@ -80,8 +88,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 
     implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
-    kapt 'com.android.databinding:compiler:3.4.0'
+    kapt 'com.android.databinding:compiler:3.1.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

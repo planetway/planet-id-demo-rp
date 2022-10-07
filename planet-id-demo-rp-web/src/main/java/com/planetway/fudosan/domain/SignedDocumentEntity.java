@@ -27,6 +27,8 @@ public class SignedDocumentEntity {
     private byte[] data;
     private String planetId;
     private boolean hasTimestamp;
+    private String consentUuid;
+    private String revokeDocumentUuid;
     private Instant createdAt;
     private Instant updatedAt;
 

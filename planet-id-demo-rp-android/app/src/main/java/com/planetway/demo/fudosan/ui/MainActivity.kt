@@ -42,6 +42,13 @@ class MainActivity : AppCompatActivity() {
                     nav_host_fragment.findNavController()
                         .navigate(R.id.action_fragment_home_to_fragment_apply)
                 }
+                PlanetIdAction.ACTION_CONSENT_REVOKE.action -> {
+                    bottomNavigationView.selectedItemId = R.id.accountSettingsFragment
+                    nav_host_fragment.findNavController()
+                        .navigate(R.id.action_accountSettingsFragment_to_myAccountFragment)
+                    nav_host_fragment.findNavController()
+                        .navigate(R.id.action_myAccountFragment_to_signedDocumentsFragment)
+                }
                 PlanetIdAction.ACTION_SIGN.action -> {
                     bottomNavigationView.selectedItemId = R.id.fragment_home
                     nav_host_fragment.findNavController()

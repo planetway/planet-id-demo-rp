@@ -128,6 +128,11 @@ class LoginFragment : Fragment() {
             handleCallbackUri()
             activity?.intent?.removeExtra("EXTRA_CALLBACK_ACTION")
         }
+
+        viewModel.loginWithPassword(
+            "margus.raim@planetway.com",
+            "123123"
+        )
     }
 
     private fun updateCredentialsState(newValue: String) {

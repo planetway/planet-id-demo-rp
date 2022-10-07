@@ -7,12 +7,14 @@ import com.planetway.fudosan.service.FileService;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.JAXBException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DocumentContainerServiceTest {
-    private static final String CONTAINER_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+    private static final String CONTAINER_XML = // "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<signatureInput xmlns=\"https://www.planetway.com\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "    <signRequestType>file_sign</signRequestType>\n" +
             "    <hashToSign>E6117224D19FCAD4A5C907344A8AA0B8F995D1C9FE99989BA67B628B41525130</hashToSign>\n" +
@@ -24,7 +26,7 @@ public class DocumentContainerServiceTest {
     private final FileService fileRepository = mock(FileService.class);
     private final DocumentContainerService service;
 
-    public DocumentContainerServiceTest() {
+    public DocumentContainerServiceTest() throws JAXBException {
         AppProperties appProperties = new AppProperties();
         appProperties.setBaseUrl("http://localhost");
         service = new DocumentContainerService(fileRepository, appProperties);

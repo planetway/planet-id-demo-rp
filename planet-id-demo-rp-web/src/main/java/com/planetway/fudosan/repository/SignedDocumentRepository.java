@@ -11,4 +11,5 @@ import java.util.List;
 public interface SignedDocumentRepository extends CrudRepository<SignedDocumentEntity, Long> {
     List<SignedDocumentEntity> getAllByUserId(Long userId);
     SignedDocumentEntity findByUserIdAndUuid(Long userId, String uuid);
+    SignedDocumentEntity findByConsentUuid(String consentUuid);
 }
