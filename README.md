@@ -285,10 +285,10 @@ Verb: `GET`
 
 Parameters:
  * `targetUserId` - the PlanetID of the user who gave the consent
- * `consumerSubsystemId` - the party who needs the data about the target user. Parameter value format `[Instance code]/[member class]/[member code]/[subsystem code]`. Example: `JP/COM/0170000000001/a-subsystem`
- * `providerServiceId` - the service that provides the data about the target user. Parameter value format `[Instance code]/[member class]/[member code]/[subsystem code]/[service code]`. Example: `JP/COM/0170000000001/b-subsystem/some-service`
+ * `consumer` - the party who needs the data about the target user. Parameter value format `[Instance code]/[member class]/[member code]/[subsystem code]`. Example: `JP/COM/0170000000001/a-subsystem`
+ * `service` - the service that provides the data about the target user. Parameter value format `[Instance code]/[member class]/[member code]/[subsystem code]/[service code]`. Example: `JP/COM/0170000000001/b-subsystem/some-service`
 
-Example: `https://consent.prod.planet-id.me/v2/relying-parties/consent-status?targetUserId=728449601214&consumerSubsystemId=JP%2FCOM%0170000000001%2Fa-subsystem&providerServiceId=JP%2FCOM%0170000000002%2Fb-subsystem%2Fsome-service`
+Example: `https://consent.prod.planet-id.me/v2/relying-parties/consent-status?targetUserId=728449601214&consumer=JP%2FCOM%0170000000001%2Fa-subsystem&service=JP%2FCOM%0170000000002%2Fb-subsystem%2Fsome-service`
 
 Output in case the consent exists - HTTP response code `200`
 ```json
