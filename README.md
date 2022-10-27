@@ -319,6 +319,45 @@ Output in case the Relying Party cannot be authenticated - HTTP response code `4
 
 **Authorization:** Only the consumer and producer can query for the consent they participate in.
 
+# Getting a signed document
+
+This endpoint is for relying parties to get a signed document. A Relying party may need to 'refres' a signed document (`.asice` file) because the timestamping of the `.asice` file may happen after the OpenID Connect flow is completed - the `.asice` container returned by the `/v2/openid/token` endpoint (json field `payload`) may or may not be timestamped.
+
+URL in production: `https://consent.prod.planet-id.me/v2/relying-parties/signed-containers/<signedDocumentId>`
+
+URL in PoC environment: `https://consent.poc.planet-id.me/v2/relying-parties/signed-containers/<signedDocumentId>`
+
+Verb: `GET`
+
+Parameters:
+ * `signedDocumentId` - the `payload_uuid` of the response from `/v2/openid/token` endpoint
+
+Example: `https://consent.prod.planet-id.me/v2/relying-parties/signed-containers/61dd7b15-fbd9-4259-b196-e3558f5fcf9e`
+
+Output if the signed document exists - HTTP response code `200`
+```
+...
+content-type: application/octet-stream
+...
+<base64 encoded bytes>
+```
+
+Output if the signed document does not exists - HTTP response code `404`
+
+```json
+{ "error": "notFound" }
+```
+
+Output in case the Relying Party cannot be authenticated - HTTP response code `401`
+
+```json
+{ "error": "unauthorized" }
+```
+
+**Authentication:** The client needs to use Basic Authentication scheme. The credentials are the same, as described above (client_id and client_secret)
+
+**Authorization:** Only the consumer and producer can query for the consent they participate in.
+
 # ASiC-E container validation
 The validator software `planetid-asice-validator.jar` can be downloaded from this repository.
 
