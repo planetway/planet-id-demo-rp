@@ -323,16 +323,16 @@ Output in case the Relying Party cannot be authenticated - HTTP response code `4
 
 This endpoint is for relying parties to get a signed document. A Relying party may need to 'refres' a signed document (`.asice` file) because the timestamping of the `.asice` file may happen after the OpenID Connect flow is completed - the `.asice` container returned by the `/v2/openid/token` endpoint (json field `payload`) may or may not be timestamped.
 
-URL in production: `https://consent.prod.planet-id.me/v2/relying-parties/signed-containers/<signedDocumentId>`
+URL in production: `https://api.prod.planet-id.me/v2/relying-parties/signed-containers/<signedDocumentId>`
 
-URL in PoC environment: `https://consent.poc.planet-id.me/v2/relying-parties/signed-containers/<signedDocumentId>`
+URL in PoC environment: `https://api.poc.planet-id.me/v2/relying-parties/signed-containers/<signedDocumentId>`
 
 Verb: `GET`
 
 Parameters:
  * `signedDocumentId` - the `payload_uuid` of the response from `/v2/openid/token` endpoint
 
-Example: `https://consent.prod.planet-id.me/v2/relying-parties/signed-containers/61dd7b15-fbd9-4259-b196-e3558f5fcf9e`
+Example: `https://api.prod.planet-id.me/v2/relying-parties/signed-containers/61dd7b15-fbd9-4259-b196-e3558f5fcf9e`
 
 Output if the signed document exists - HTTP response code `200`
 ```
